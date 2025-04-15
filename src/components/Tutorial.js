@@ -1,60 +1,59 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from "react-router-dom";
 import { updateTutorial, deleteTutorial } from "../slices/tutorials";
 import TutorialDataService from "../services/TutorialService";
-
+// this component through props will receive the tutorials and the setTutorials function
 const Tutorial = (props) => {
-  const { id }= useParams();
+  const { id } = useParams();
   let navigate = useNavigate();
 
   const initialTutorialState = {
     id: null,
     title: "",
     description: "",
-    published: false
+    published: false,
   };
   const [currentTutorial, setCurrentTutorial] = useState(initialTutorialState);
   const [message, setMessage] = useState("");
 
   const dispatch = useDispatch();
 
-  const getTutorial = id => {
+  const getTutorial = (id) => {
     TutorialDataService.get(id)
-      .then(response => {
+      .then((response) => {
         setCurrentTutorial(response.data);
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   };
 
   useEffect(() => {
-    if (id)
-      getTutorial(id);
+    if (id) getTutorial(id);
   }, [id]);
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     setCurrentTutorial({ ...currentTutorial, [name]: value });
   };
 
-  const updateStatus = status => {
+  const updateStatus = (status) => {
     const data = {
       id: currentTutorial.id,
       title: currentTutorial.title,
       description: currentTutorial.description,
-      published: status
+      published: status,
     };
 
     dispatch(updateTutorial({ id: currentTutorial.id, data }))
       .unwrap()
-      .then(response => {
+      .then((response) => {
         console.log(response);
         setCurrentTutorial({ ...currentTutorial, published: status });
         setMessage("The status was updated successfully!");
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   };
@@ -62,11 +61,11 @@ const Tutorial = (props) => {
   const updateContent = () => {
     dispatch(updateTutorial({ id: currentTutorial.id, data: currentTutorial }))
       .unwrap()
-      .then(response => {
+      .then((response) => {
         console.log(response);
         setMessage("The tutorial was updated successfully!");
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   };
@@ -77,7 +76,7 @@ const Tutorial = (props) => {
       .then(() => {
         navigate("/tutorials");
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   };

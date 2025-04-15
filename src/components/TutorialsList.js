@@ -6,27 +6,27 @@ import {
   deleteAllTutorials,
 } from "../slices/tutorials";
 import { Link } from "react-router-dom";
-
+// this component through props will receive the tutorials and the setTutorials function
 const TutorialsList = () => {
   const [currentTutorial, setCurrentTutorial] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [searchTitle, setSearchTitle] = useState("");
 
-  const tutorials = useSelector(state => state.tutorials);
+  const tutorials = useSelector((state) => state.tutorials);
   const dispatch = useDispatch();
 
-  const onChangeSearchTitle = e => {
+  const onChangeSearchTitle = (e) => {
     const searchTitle = e.target.value;
     setSearchTitle(searchTitle);
   };
 
   const initFetch = useCallback(() => {
     dispatch(retrieveTutorials());
-  }, [dispatch])
+  }, [dispatch]);
 
   useEffect(() => {
-    initFetch()
-  }, [initFetch])
+    initFetch();
+  }, [initFetch]);
 
   const refreshData = () => {
     setCurrentTutorial(null);
@@ -40,10 +40,10 @@ const TutorialsList = () => {
 
   const removeAllTutorials = () => {
     dispatch(deleteAllTutorials())
-      .then(response => {
+      .then((response) => {
         refreshData();
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   };
