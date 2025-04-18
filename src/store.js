@@ -1,13 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
-import tutorialReducer from './slices/tutorials';
+import { configureStore } from "@reduxjs/toolkit";
+import tutorialReducer from "./slices/tutorials";
 
 const reducer = {
-  tutorials: tutorialReducer
-}
+  tutorials: tutorialReducer,
+};
 
 const store = configureStore({
   reducer: reducer,
   devTools: true,
-})
+});
 
 export default store;

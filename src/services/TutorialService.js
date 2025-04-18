@@ -4,11 +4,11 @@ const getAll = () => {
   return http.get("/tutorials");
 };
 
-const get = id => {
+const get = (id) => {
   return http.get(`/tutorials/${id}`);
 };
 
-const create = data => {
+const create = (data) => {
   return http.post("/tutorials", data);
 };
 
@@ -16,7 +16,7 @@ const update = (id, data) => {
   return http.put(`/tutorials/${id}`, data);
 };
 
-const remove = id => {
+const remove = (id) => {
   return http.delete(`/tutorials/${id}`);
 };
 
@@ -24,7 +24,7 @@ const removeAll = () => {
   return http.delete(`/tutorials`);
 };
 
-const findByTitle = title => {
+const findByTitle = (title) => {
   return http.get(`/tutorials?title=${title}`);
 };
 
@@ -35,7 +35,7 @@ const TutorialService = {
   update,
   remove,
   removeAll,
-  findByTitle
+  findByTitle,
 };
 
 export default TutorialService;
