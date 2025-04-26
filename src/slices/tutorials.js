@@ -62,7 +62,9 @@ const tutorialSlice = createSlice({
       return [...action.payload];
     },
     [updateTutorial.fulfilled]: (state, action) => {
-      const index = state.findIndex(tutorial => tutorial.id === action.payload.id);
+      const index = state.findIndex(
+        (tutorial) => tutorial.id === action.payload.id
+      );
       state[index] = {
         ...state[index],
         ...action.payload,

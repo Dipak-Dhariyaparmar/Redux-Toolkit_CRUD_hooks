@@ -7,14 +7,14 @@ const AddTutorial = () => {
     id: null,
     title: "",
     description: "",
-    published: false
+    published: false,
   };
   const [tutorial, setTutorial] = useState(initialTutorialState);
   const [submitted, setSubmitted] = useState(false);
 
   const dispatch = useDispatch();
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     setTutorial({ ...tutorial, [name]: value });
   };
@@ -24,17 +24,17 @@ const AddTutorial = () => {
 
     dispatch(createTutorial({ title, description }))
       .unwrap()
-      .then(data => {
+      .then((data) => {
         console.log(data);
         setTutorial({
           id: data.id,
           title: data.title,
           description: data.description,
-          published: data.published
+          published: data.published,
         });
         setSubmitted(true);
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   };
@@ -62,7 +62,7 @@ const AddTutorial = () => {
               className="form-control"
               id="title"
               required
-              value={tutorial.title || ''}
+              value={tutorial.title || ""}
               onChange={handleInputChange}
               name="title"
             />
@@ -75,7 +75,7 @@ const AddTutorial = () => {
               className="form-control"
               id="description"
               required
-              value={tutorial.description || ''}
+              value={tutorial.description || ""}
               onChange={handleInputChange}
               name="description"
             />
